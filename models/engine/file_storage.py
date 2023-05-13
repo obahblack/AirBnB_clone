@@ -38,3 +38,13 @@ class FileStorage:
 
     def reload(self):
         """If json file exits, convert obj dicts back to instances"""
+        try:
+            with open(self.__file_path, mode="r", encoding="utf-8") as f:
+                self.__objects = json.load(f)
+                for key, value in self.__objects.items():
+                    class_name = key.split('.')[0]
+                    if class_name in self.class_dict:
+                        self.__objects[key] = \
+                                self.class_dict[class_name](**value)
+        except FileNotFoundError:
+            pass
