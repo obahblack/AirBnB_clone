@@ -53,3 +53,13 @@ class TestBaseModel(unittest.TestCase):
         self.base1.save()
         self.assertNotEqual(self.base1.created_at, self.base1.updated_at)
 
+    def test_to_dict(self):
+        """Testing the to_dict function for the dictionary"""
+        base1_dict = self.base1.to_dict()
+        self.assertEqual(self.base1.__class__.__name__, 'BaseModel')
+        self.assertIsInstance(base1_dict['created_at'], str)
+        self.assertIsInstance(base1_dict['updated_at'], str)
+
+if __name__ == "__main__":
+    unittest.main()
+
