@@ -86,7 +86,7 @@ class HBNBCommand(cmd.Cmd):
         """Print all objects or all objects of specified class"""
         args = line.split()
         obj_list = []
-        if len(line) == 0:
+        if len(args) == 0:
             for objs in storage.all().values():
                 obj_list.append(objs)
             print(obj_list)
@@ -100,7 +100,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, line):
         """Update if given exact object, exact attriibute"""
-        args = parse(line)
+        args = line.split()
         if len(args) >= 4:
             key = "{}.{}".format(args[0], args[1])
             cast = type(eval(args[3]))
@@ -118,7 +118,7 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         elif ("{}.{}".format(args[0], args[1])) \
                 not in storage.all().keys():
-            print("** not instance found **")
+            print("** no instance found **")
         elif len(args) == 2:
             print("** attribute name missing **")
         else:
@@ -147,7 +147,7 @@ class HBNBCommand(cmd.Cmd):
         try:
             args = args[1].split('(')
             command = args[0]
-            if command = 'all':
+            if command == 'all':
                 # Call do_all method with class_arg as argument
                 HBNBCommand.do_count(self, class_arg)
             elif command == 'count':
@@ -166,7 +166,7 @@ class HBNBCommand(cmd.Cmd):
             elif command == 'destroy':
                 # Extract the id_arg from the command argument
                 args = args[1].split(')')
-                id_args = args[0]
+                id_arg = args[0]
                 id_arg = id_arg.strip("'")
                 id_arg = id_arg.strip('"')
                 # Concatenate class_arg and id_arg
@@ -179,7 +179,7 @@ class HBNBCommand(cmd.Cmd):
                 id_arg = args.strip('"')
                 name_arg = args[1].strip(',')
                 val_arg = args[2]
-                name_arg = name_arg_strip(' ')
+                name_arg = name_arg.strip(' ')
                 name_arg = name_arg.strip("'")
                 name_arg = name_arg.strip('"')
                 val_arg = val_arg.strip(' ')

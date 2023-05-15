@@ -33,7 +33,7 @@ class TestConsole(unittest.TestCase):
         """Remove temporary file (file.json) created as a result"""
         try:
             os.remove("file.json")
-        except:
+        except FileNotFoundError:
             pass
 
     """Check for Pep8 style conformance"""
@@ -84,8 +84,8 @@ class TestConsole(unittest.TestCase):
             self.typing.onecmd("create User")  # just need to create instances
         with patch('sys.stdout', new=StringIO()) as fake_output:
             self.typing.onecmd("User.all()")
-            self.assertEqual("[[User]",
-                             fake_output.getvalue()[:7])
+            self.assertEqual("[<lass 'User'>, <class 'User'>]\n",
+                             fake_output.getvalue())
 
     def test_all(self):
         """Test cmd output: all"""

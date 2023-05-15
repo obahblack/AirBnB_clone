@@ -66,7 +66,7 @@ class BaseModel():
         result = self.__dict__.copy()
         result['__class__'] = type(self).__name__
         result['created_at'] = result['created_at'].isoformat()
-        result['updated_at'] = result['update_at'].isoformat()
+        result['updated_at'] = result['updated_at'].isoformat()
         return result
 
     @classmethod
