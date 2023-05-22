@@ -10,4 +10,7 @@ div.container {
     max-width: 1000px;
     margin: 30px auto;
     text-align: center;
+    position: relative;
+    background-color: white;
+    margin-bottom: 60px;
 }
